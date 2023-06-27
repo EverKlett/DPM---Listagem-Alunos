@@ -1,8 +1,6 @@
 package com.example.listagemalunos.activities;
 
 import java.util.List;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +19,7 @@ import android.widget.Toast;
 import com.example.listagemalunos.R;
 import com.example.listagemalunos.dao.AlunoDAO;
 import com.example.listagemalunos.model.Aluno;
+
 
 public class ListaAlunosActivity extends Activity {
 
@@ -76,23 +75,23 @@ public class ListaAlunosActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.menu_novo:
-                Toast.makeText(ListaAlunosActivity.this,
-                        "Voce clicou no novoAluno", Toast.LENGTH_LONG).show();
+        int itemId = item.getItemId();
 
-                Intent intent = new Intent(ListaAlunosActivity.this,
-                        FormularioActivity.class);
+        if (itemId == R.id.menu_novo) {
+            Toast.makeText(ListaAlunosActivity.this,
+                    "Voce clicou no novoAluno", Toast.LENGTH_LONG).show();
 
-                startActivity(intent);
+            Intent intent = new Intent(ListaAlunosActivity.this,
+                    FormularioActivity.class);
 
-                return false;
-            default:
-                return super.onOptionsItemSelected(item);
+            startActivity(intent);
+
+            return false;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
