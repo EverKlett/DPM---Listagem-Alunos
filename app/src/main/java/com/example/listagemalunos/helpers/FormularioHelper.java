@@ -1,5 +1,7 @@
 package com.example.listagemalunos.helpers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -13,7 +15,7 @@ public class FormularioHelper {
     private EditText site;
     private SeekBar nota;
     private EditText endereco;
-    private ImageView botaoImagem;
+    private ImageView foto;
     private Aluno aluno;
 
     public FormularioHelper(FormularioActivity activity) {
@@ -23,7 +25,7 @@ public class FormularioHelper {
         site = (EditText) activity.findViewById(R.id.site);
         nota = (SeekBar) activity.findViewById(R.id.nota);
         endereco = (EditText) activity.findViewById(R.id.endereco);
-        botaoImagem = (ImageView) activity.findViewById(R.id.foto);
+        foto = (ImageView) activity.findViewById(R.id.foto);
         aluno = new Aluno();
     }
 
@@ -38,11 +40,30 @@ public class FormularioHelper {
         return aluno;
     }
 
-    public void colocaAlunoNoFormulario(Aluno alunoParaSerAlterado) {
-        nome.setText(alunoParaSerAlterado.getNome());
-        telefone.setText(alunoParaSerAlterado.getTelefone());
-        site.setText(alunoParaSerAlterado.getSite());
-        endereco.setText(alunoParaSerAlterado.getEndereco());
-        nota.setProgress((int) alunoParaSerAlterado.getNota());
+    public void colocaAlunoNoFormulario(Aluno aluno) {
+        this.aluno = aluno;
+
+        nome.setText(aluno.getNome());
+        telefone.setText(aluno.getTelefone());
+        site.setText(aluno.getSite());
+        endereco.setText(aluno.getEndereco());
+        nota.setProgress((int) aluno.getNota());
+
+        if (aluno.getFoto() != null) {
+            this.carregaImagem(aluno.getFoto());
+        }
     }
+
+    public ImageView getBotaoImagem() {
+        return foto;
+    }
+
+    public void carregaImagem(String localArquivoFoto) {
+        Bitmap imagemFoto = BitmapFactory.decodeFile(localArquivoFoto);
+        Bitmap imagemFotoReduzida = Bitmap.createScaledBitmap(imagemFoto, 100, 100, true);
+
+        aluno.setFoto(localArquivoFoto);
+        foto.setImageBitmap(imagemFotoReduzida);
+    }
+
 }
