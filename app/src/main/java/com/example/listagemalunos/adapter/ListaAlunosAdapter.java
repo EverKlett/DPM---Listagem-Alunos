@@ -54,8 +54,7 @@ public class ListaAlunosAdapter extends BaseAdapter {
         if (aluno.getFoto() != null) {
             bm = BitmapFactory.decodeFile(aluno.getFoto());
         } else {
-            bm = BitmapFactory.decodeResource(activity.getResources(),
-                    R.drawable.noimage);
+            bm = BitmapFactory.decodeResource(activity.getResources(), android.R.drawable.ic_menu_report_image);
         }
 
         bm = Bitmap.createScaledBitmap(bm, 100, 100, true);
